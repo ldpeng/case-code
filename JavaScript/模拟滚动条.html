@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin: 0;padding: 0;}
+        .box {
+            width: 300px;
+            height: 500px;
+            border: 1px solid red;
+            margin: 100px;
+            position: relative;
+        }
+        .content {
+            padding: 5px 18px 5px 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .scroll {
+            width: 18px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #eee;
+        }
+        .bar {
+            height: 100px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: red;
+            border-radius:  10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="content" id="con">
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+        我是文字内容，你是谁，你饿不饿是文字内容
+
+
+    </div>
+    <div class="scroll">
+        <div class="bar" id="bar"></div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+
+    var box = document.getElementById("box");
+    var con = document.getElementById("con");
+    var bar = document.getElementById("bar");
+    //  第一个问题，按道理 文字越多 ，这个红色的滚动条 越短
+    //  计算红色bar 的高度  （ 容器的高度 / 内容的高度 *容器的高度 ）
+    var barHeight = box.offsetHeight / con.offsetHeight * box.offsetHeight;
+//    alert(barHeight)
+    bar.style.height = barHeight + "px";
+    // 制作开始拖动红色方块
+    //  拖拽原理 先 按下  后 移动
+    bar.onmousedown = function(event) {
+        // 当我们每次点击的时候，先 算出 bar 距离父级的距离
+        var event = event || window.event;
+        var t = event.pageY - bar.offsetTop;  //
+        document.onmousemove = function(event) {
+            var event = event || window.event;
+            var  y = event.pageY - t;
+
+            //  大盒子    内容盒子       红色盒子      内容盒子
+            // 内容盒子 - 大盒子   /   内容盒子 - 红色盒子
+            // (内容的高度 - 容器的高度)   / (容器的高度 - 滚动条的高度)* 滚动条移动的距离
+            var cont = (con.offsetHeight - box.offsetHeight) / (box.offsetHeight - bar.offsetHeight) * y;
+            if(y < 0) {
+                y = 0;
+            } else if(y > box.offsetHeight - bar.offsetHeight) {
+                y = box.offsetHeight - bar.offsetHeight;
+            }
+            else {
+                con.style.top = -cont + "px";
+            }
+           bar.style.top = y + 'px';
+            window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+        }
+        document.onmouseup = function() {
+            document.onmousemove = null;
+        }
+    }
+
+
+</script>

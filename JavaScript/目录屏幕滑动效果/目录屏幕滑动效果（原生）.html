@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin: 0;padding:0;}
+        ol,ul {list-style: none;}
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        ul {
+            width: 100%;
+            height: 100%;
+        }
+        ul li {
+            width: 100%;
+            height: 100%;
+        }
+        ol {
+            position: fixed;
+            top: 300px;
+            left: 50px;
+        }
+        ol li {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul">
+    <li>第一屏幕</li>
+    <li>第二屏幕</li>
+    <li>第三屏幕</li>
+    <li>第四屏幕</li>
+    <li>第五屏幕</li>
+</ul>
+<ol id="ol">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ol>
+</body>
+</html>
+<script>
+    var ol = document.getElementById("ol");
+    var ul = document.getElementById("ul");
+    var arrColor = ["pink","purple","orange","red","blue"];  // 颜色数组
+    var olChild = ol.children;
+    var ulChild = ul.children
+    var timer = null,leader = 0,target = 0;
+    window.onscroll = function() {
+        leader = document.body.scrollTop;
+        console.log(leader);
+    }
+    for(var i=0; i<olChild.length;i++) {
+        // 遍历颜色
+        olChild[i].style.backgroundColor = arrColor[i];
+        ulChild[i].style.backgroundColor = arrColor[i];
+        // 页面滑动   当我们点击了 ol 里面 第2个li
+        //  页面要滑动到  ul 里面 第2个li  的位置
+        // window.scrollTo(0,y);  我们需要知道 ul  第2个li 的y 坐标
+        //  ulChild[1].offsetTop  可以得到  第2个li y 坐标
+        // leader = leader + (target - leader ) / 10;
+        olChild[i].index = i; // 得到ol 里面的每个小li 的索引号
+        olChild[i].onclick = function() {
+               /* alert(this.index);*/
+            clearInterval(timer);
+            target = ulChild[this.index].offsetTop;  // 核心语句   要去哪儿
+            // window.scrollTo(0,ulChild[this.index].offsetTop);
+            timer = setInterval(function() {
+                var step = (target - leader) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                leader = leader + step;  // 当前的位置  + 步长
+                window.scrollTo(0,leader);
+                if(leader == target ) {
+                    clearInterval(timer);
+                }
+            } ,30)
+        }
+    }
+ </script>

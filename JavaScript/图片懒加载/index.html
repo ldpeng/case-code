@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            height: 2000px;
+        }
+    </style>
+    <!--引jQuery-->
+    <script src="../jquery/jquery-min.js"></script>
+    <!--引插件-->
+    <script src="jquery.lazyload.min.js"></script>
+    <script>
+        $(function () {
+            $("img.lazy").lazyload();
+        });
+    </script>
+</head>
+<body>
+<div>
+
+</div>
+<img class="lazy" data-original="1.jpg" width="640" height="480">
+</body>
+</html>

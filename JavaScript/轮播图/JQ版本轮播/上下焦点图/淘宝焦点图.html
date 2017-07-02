@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+*{ padding:0; margin:0; list-style:none; border:0;}
+.all{ width:490px; height:170px; margin:100px auto; position:relative; padding:5px; border:1px solid #ccc;}
+.all div{width:490px; height:170px; position:relative; overflow:hidden;}
+.all ul{ position:absolute; left:0; top:0;}
+.all img{ display:block;}
+
+.all ol{ position:absolute; right:10px; bottom:10px;}
+
+.all ol li{ width:20px; height:20px; background:#fff; border:1px solid #ccc; float:left; margin-left:10px; line-height:20px; text-align:center; cursor:pointer;}
+.all ol li.current{ background:yellow;}
+</style>
+<script type="text/javascript" src="../../../jquery/jquery-min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//事件模块
+	$('.all ol li').mouseover(function(e) {
+		//角标的工作添加一个类
+        $(this).addClass('current').siblings().removeClass();
+		var index=$(this).index();
+
+		//图片的工作实际上是ul的top变化；
+		$('.all ul').stop().animate({top:index*-170},500)
+
+		num = index;
+    });
+
+	//制作一个定时器去实现自动播放功能； 定时器模块
+	var timer = null;
+	var num = 0;
+	timer = setInterval(autoplay,2000);
+	function autoplay() {
+		num++;
+		if(num > 4) {
+            num = 0;
+        }
+		$('.all ol li').eq(num).addClass('current').siblings().removeClass();
+		$('.all ul').stop().animate({
+            top: num * -170
+        }, 500);
+	}
+
+	//鼠标移上停止定时器模块
+	$('.all div').hover(function(e) {
+        //停止自动播放，清除定时器；
+		clearInterval(timer);
+    }, function(e) {
+		clearInterval(timer);
+		timer=setInterval(autoplay,2000);
+    });
+
+
+
+
+});
+</script>
+</head>
+
+<body>
+<div class="all">
+    <div>
+        <ul>
+            <li><img src="img/taobao/01.jpg" width="490" height="170"></li>
+            <li><img src="img/taobao/02.jpg" width="490" height="170"></li>
+            <li><img src="img/taobao/03.jpg" width="490" height="170"></li>
+            <li><img src="img/taobao/04.jpg" width="490" height="170"></li>
+            <li><img src="img/taobao/05.jpg" width="490" height="170"></li>
+        </ul>
+        <ol>
+            <li class="current">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

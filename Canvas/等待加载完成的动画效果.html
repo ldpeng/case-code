@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="konva/konva.min.js"></script>
+</head>
+<body>
+  <div id="demo"></div>
+  <script>
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  var cenX = width / 2;
+  var cenY = height / 2;
+
+    var stage = new Konva.Stage({
+      container: "demo",
+      width:width,
+      height: height
+    });
+    var layer = new Konva.Layer();
+    stage.add(layer);
+
+    var cricleArr = [];
+    var circleColor = ["red","green","blue"];
+    var radius = 50;
+    for(var i = 0; i< 3 ; i++){
+      var circle = new Konva.Circle({
+        x: cenX + (i - 1) * 2 * radius,
+        y: cenY,
+        radius: radius,
+        fill: circleColor[i]
+      });
+      cricleArr[i] = circle;
+      layer.add(circle);
+    }
+    layer.draw();
+    function circleMove(){
+      cricleArr[0].setZIndex(2);
+      cricleArr[2].setZIndex(0);
+      cricleArr[0].to({
+        x: cricleArr[0].x() + 4 * radius,
+        scaleX: .8,
+        scaleY: .8,
+        duration: 2,
+        onFinish: function(){
+          cricleArr[0].setZIndex(0);
+          cricleArr[0].to({
+            x: cricleArr[0].x() - 4 * radius,
+            scaleX: 1.2,
+            scaleY: 1.2,
+            duration: 2,
+          });
+        }
+      });
+       cricleArr[2].to({
+        x: cricleArr[2].x() - 4 * radius,
+        duration: 2,
+        scaleX: 1.2,
+        scaleY: 1.2,
+        onFinish: function(){
+          cricleArr[2].setZIndex(2);
+          cricleArr[2].to({
+          x: cricleArr[2].x() + 4 * radius,
+          duration: 2,
+          scaleX: .8,
+          scaleY: .8,
+          onFinish:function(){
+            circleMove();
+          }
+          })
+        }
+      });
+    }
+    circleMove();
+  </script>
+</body>
+</html>

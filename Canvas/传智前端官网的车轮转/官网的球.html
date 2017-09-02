@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="../konva/konva.min.js"></script>
+  <script src="js/group.js"></script>
+</head>
+<body>
+  <div id="demo"></div>
+  <script>
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  var cenX = width / 2;
+  var cenY = height / 2;
+
+    var stage = new Konva.Stage({
+      container: "demo",
+      width:width,
+      height: height
+    });
+    var layer = new Konva.Layer();
+    stage.add(layer);
+      //=================静止部分================================
+     var outerCircle1 = new Konva.Circle({
+      x: cenX,
+      y: cenY,
+      radius: 430 / 2,
+      stroke: '#E0E4EE',
+      dash: [4,4]
+      });
+     layer.add(outerCircle1);
+
+     var outerCircle2 = new Konva.Circle({
+      x: cenX,
+      y: cenY,
+      radius: 274 / 2,
+      stroke: '#E0E4EE',
+      dash: [4,4]
+     });
+     layer.add(outerCircle2);
+
+     var outerCircle3 = new Konva.Circle({
+      x: cenX,
+      y: cenY,
+      radius: 252 / 2,
+      stroke: '#2A3466',
+      dash: [8,4]
+     });
+     layer.add(outerCircle3);
+
+     var innerRing = new Konva.Ring({
+      x: cenX,
+      y: cenY,
+      innerRadius: 130 / 2,
+      outerRadius: 180 / 2,
+      fill: 'black',
+      opacity: 0.1
+    });
+     layer.add(innerRing);
+     var innerCircle = new Konva.Circle({
+      x: cenX,
+      y: cenY,
+      radius: 130 / 2,
+      fill: "#2A3466"
+     });
+     layer.add(innerCircle);
+
+     var webQuanZhan = new Konva.Text({
+        x: cenX - innerCircle.radius(),
+        y: cenY - 10,
+        width: innerCircle.radius() * 2,
+        text: 'WEB 全栈',
+        fontSize: 20,
+        fontFamily: 'Calibri',
+        fill: 'white',
+        align: 'center'
+      });
+     layer.add(webQuanZhan);
+     //=====================静止部分=======================================
+	 
+     //封装每个会运动的小球
+
+     //页面会动的部分分为两个部分一个部分是顺时针，我们单独给一个group
+     //另一个是逆时针，我们也单独给一个group
+     var outGroup = new Konva.Group({
+      x: cenX,
+      y: cenY,
+     });
+     layer.add(outGroup);
+    var outSmallCircleR = 100 / 2;
+    var innerSmallCricleR =  78 / 2;
+    //第一个圆我们给o度
+     var webAppGroup = new Group({
+          x: 430 / 2 * Math.cos( 0 * Math.PI / 180),
+          y: 430 / 2 * Math.sin( 0 * Math.PI / 180),
+          innerRadius: outSmallCircleR,
+          outerRadius: innerSmallCricleR,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "webApp",
+          fontSize: 20,
+     });
+     webAppGroup.render();
+     webAppGroup.addToGroupOrLayer(outGroup);
+     var abcGroup = new Group({
+          x: 430 / 2 * Math.cos( 72 * Math.PI / 180),
+          y: 430 / 2 * Math.sin( 72 * Math.PI / 180),
+          innerRadius: outSmallCircleR,
+          outerRadius: innerSmallCricleR,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "abc",
+          fontSize: 20,
+     });
+     abcGroup.render();
+     abcGroup.addToGroupOrLayer(outGroup);
+     var defGroup = new Group({
+          x: 430 / 2 * Math.cos( 72 * 2 * Math.PI / 180),
+          y: 430 / 2 * Math.sin( 72 * 2 * Math.PI / 180),
+          innerRadius: outSmallCircleR,
+          outerRadius: innerSmallCricleR,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "def",
+          fontSize: 20,
+     });
+     defGroup.render();
+     defGroup.addToGroupOrLayer(outGroup);
+     var ghiGroup = new Group({
+          x: 430 / 2 * Math.cos( 72 * 3 * Math.PI / 180),
+          y: 430 / 2 * Math.sin( 72 * 3 * Math.PI / 180),
+          innerRadius: outSmallCircleR,
+          outerRadius: innerSmallCricleR,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "ghi",
+          fontSize: 20,
+     });
+     ghiGroup.render();
+     ghiGroup.addToGroupOrLayer(outGroup);
+     var jklGroup = new Group({
+          x: 430 / 2 * Math.cos( 72 * 4 * Math.PI / 180),
+          y: 430 / 2 * Math.sin( 72 * 4 * Math.PI / 180),
+          innerRadius: outSmallCircleR,
+          outerRadius: innerSmallCricleR,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "jkl",
+          fontSize: 20,
+     });
+     jklGroup.render();
+     jklGroup.addToGroupOrLayer(outGroup);
+     //第一组完成
+     //第二组
+     var innerGroup = new Konva.Group({
+      x: cenX,
+      y: cenY
+     });
+     layer.add(innerGroup);
+    var htmlGroup = new Group({
+          x: 252 / 2 * Math.cos(  0 * Math.PI / 180),
+          y: 252 / 2 * Math.sin(  0 * Math.PI / 180),
+          innerRadius: outSmallCircleR * 2 / 3,
+          outerRadius: innerSmallCricleR * 2 / 3,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "html",
+          fontSize: 20,
+     });
+     htmlGroup.render();
+     htmlGroup.addToGroupOrLayer(innerGroup);
+      var cssGroup = new Group({
+          x: 252 / 2 * Math.cos( 90 * Math.PI / 180),
+          y: 252 / 2 * Math.sin( 90 * Math.PI / 180),
+          innerRadius: outSmallCircleR * 2 / 3,
+          outerRadius: innerSmallCricleR * 2 / 3,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "css",
+          fontSize: 20,
+     });
+     cssGroup.render();
+     cssGroup.addToGroupOrLayer(innerGroup);
+      var jsGroup = new Group({
+          x: 252 / 2 * Math.cos( 90 * 2 * Math.PI / 180),
+          y: 252 / 2 * Math.sin( 90 * 2 * Math.PI / 180),
+          innerRadius: outSmallCircleR * 2 / 3,
+          outerRadius: innerSmallCricleR * 2 / 3,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "html",
+          fontSize: 20,
+     });
+     jsGroup.render();
+     jsGroup.addToGroupOrLayer(innerGroup);
+      var jqGroup = new Group({
+          x: 252 / 2 * Math.cos( 90 * 3 * Math.PI / 180),
+          y: 252 / 2 * Math.sin( 90 * 3 * Math.PI / 180),
+          innerRadius: outSmallCircleR * 2 / 3,
+          outerRadius: innerSmallCricleR * 2 / 3,
+          innerFill: "red",
+          outerFill: "yellow",
+          text: "html",
+          fontSize: 20,
+     });
+     jqGroup.render();
+     jqGroup.addToGroupOrLayer(innerGroup);
+    layer.draw();
+    var angle = 100;
+    var animation = new Konva.Animation(function(frame){
+      //得到一个timeDiff时间内，group转了多少度
+      var rotateAngle = frame.timeDiff * angle / 1000;
+      //让外面的层开始转动
+      outGroup.rotate(rotateAngle);
+      //让文字开始转
+     var outArr =  outGroup.getChildren();
+     for (var i = 0; i < outArr.length; i++) {
+        outArr[i].rotate(-rotateAngle);
+     }
+     innerGroup.rotate(-rotateAngle);
+      //让文字开始转
+     var innerArr =  innerGroup.getChildren();
+     for (var i = 0; i < innerArr.length; i++) {
+        innerArr[i].rotate(rotateAngle);
+     }
+    },layer);
+    animation.start();
+    layer.addEventListener("mouseover",function(){
+      angle = 10;
+    });
+     layer.addEventListener("mouseleave",function(){
+      angle = 100;
+    });
+  </script>
+</body>
+</html>

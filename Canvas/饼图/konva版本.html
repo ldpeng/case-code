@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+            background-color: #F0F0F0;
+		}
+	</style>
+	<script src= "../konva/konva.js"></script>
+	<script src="cake.js"></script>
+</head>
+<body>
+	<div id="demo"></div>
+	<script>
+		var stage = new Konva.Stage({
+			container: 'demo',
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+		var layer = new Konva.Layer();
+		stage.add(layer);
+		var data = [ 
+	    	{ name: "前端", value: .25, color: '#e0e'  },
+	    	{ name: "php",  value: .2,  color: 'orange'},
+	    	{ name: "UI",	value: .3,	color: 'blue'  },
+			{ name: "C++",	value: .05,	color: 'green' },
+			{ name: "游戏",	value: .1,	color: 'purple'},
+			{ name: "Java",	value: .1,	color: 'red'   }
+		];
+		var cake = new Cake({
+			data:data,
+			innerR: 200,
+			outerR: 210,
+			outerColor: "#ccc",
+			x: stage.width() / 2,
+			y: stage.height() / 2,
+			outerStroke: 2
+		});
+		cake.addToGroupOrLayer(layer);
+
+		layer.draw();
+		cake.moveTo();
+	</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+            background-color: #F0F0F0;
+		}
+	</style>
+	<script src= "../konva/konva.js"></script>
+	<script src= "js/schedule.js"></script>
+</head>
+<body>
+	<div id="demo"></div>
+	<script>
+		var stage = new Konva.Stage({
+			container: 'demo',
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+		var layer = new Konva.Layer();
+		stage.add(layer);
+
+		var schedule = new Schedule({
+			x: stage.width() / 8,
+			y: stage.height() / 2,
+			innerW: 0,
+			h: stage.height() / 16,
+			fill: 'pink',
+			innerCornerRadius: 10,
+			outerW: 3 / 4 * stage.width(),
+			outerCornerRadius: 10,
+			stroke: 'blue',
+			stage: stage,
+			text: "努力加载中： 0%",
+			fontSize: 20
+		});
+		schedule.addToGroupOrLayer(layer);
+		var imgArr = ["1.png","2.png","3.png","4.png","5.png"];
+		var loadNum = 0;//已经加载完成的图片
+		imgArr.forEach(function(item,index){//item当前遍历到的数据  index就是item对应的索引
+			var img = new Image();
+			img.src = "image/" + imgArr[index];//image/1.png
+			img.onload = function(){
+				loadNum ++;
+			}
+		});
+		var time = setInterval(function(){
+			if(loadNum >= imgArr.length){
+				//清除定时器
+				clearInterval(time);
+			}
+			schedule.changeVal(loadNum / imgArr.length);
+		},2000);
+		layer.draw();
+
+	</script>
+</body>
+</html>

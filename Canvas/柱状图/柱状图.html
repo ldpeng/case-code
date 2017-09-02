@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+            background-color: #F0F0F0;
+		}
+	</style>
+	<script src= "../konva/konva.js"></script>
+	<script src="js/histogram.js"></script>
+</head>
+<body>
+	<div id="demo"></div>
+	<script>
+		var stage = new Konva.Stage({
+			container: 'demo',
+			width: window.innerWidth,
+			height: window.innerHeight
+		});
+		var layer = new Konva.Layer();
+		stage.add(layer);
+		var data = [
+			{ name: '前端', value: '.8', color: 'green'},
+			{ name: 'PHP', value: '.3', color: 'blue'},
+			{ name: 'Java', value: '.7', color: 'red'},
+			{ name: 'UI', value: '.9', color: 'orange'},
+			{ name: 'IOS', value: '.4', color: 'purple'},
+			{ name: 'Android', value: '.9', color: 'pink'}
+		];
+		var histogram = new Histogram({
+			x: 1/ 8 * stage.width(),
+			y: 3/4 * stage.height(),
+			data: data,
+			width: 3 /4 * stage.width(),
+			height: 1/2 * stage.height()
+		});
+		histogram.addToGroupOrLayer(layer);
+
+		layer.draw();
+		histogram.moveTo();
+		stage.on("contentClick",function(){
+			histogram.moveTo();
+		});
+	</script>
+</body>
+</html>

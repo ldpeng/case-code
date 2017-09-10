@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .name{
+            color:green
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+    <span id='span'>
+
+    </span>
+
+</div>
+</body>
+</html>
+
+<script>
+    //替换  首先寻找@（name）这种格式的数据，然后用真实的数据替换掉@（name）
+    var user = {name:'书奎',role:'钻石会员'}
+  /*  user.name
+    user['name']*/
+    function formateString(str, data){
+        return str.replace(/@\((\w+)\)/g, function(match, key){
+            return data[key]
+        });
+    }
+
+
+    window.onload=function(){
+        Login()
+    }
+
+    //登录成功后 -简单的绑定
+
+    function Login(){
+       /* 数据
+        将数据和html进行绑定*/
+        var user = {name:'书奎',role:'钻石会员'}
+        var span = document.getElementById("span");
+      /*  span.innerHTML = "欢迎"+user.role+"<strong class='name'>"+user.name+'</strong>来到京东世界';*/
+       var str = '欢迎@(role)<strong class="name">@(name)</strong>访问京东世界'
+
+        str = formateString(str,user)
+        span.innerHTML = str
+    };
+
+</script>

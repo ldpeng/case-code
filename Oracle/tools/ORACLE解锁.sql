@@ -1,13 +1,13 @@
---²é¿´±»ËøµÄ±í 
+--æŸ¥çœ‹è¢«é”çš„è¡¨
 select b.owner,b.object_name,a.session_id,a.locked_mode from v$locked_object a,dba_objects b where b.object_id = a.object_id;
 
---²é¿´ÄÇ¸öÓÃ»§ÄÇ¸ö½ø³ÌÕÕ³ÉËÀËø
+--æŸ¥çœ‹é‚£ä¸ªç”¨æˆ·é‚£ä¸ªè¿›ç¨‹ç…§æˆæ­»é”
 select b.username,b.sid,b.serial#,logon_time from v$locked_object a,v$session b where a.session_id = b.sid order by b.logon_time;
 
---²é¿´Á¬½ÓµÄ½ø³Ì 
+--æŸ¥çœ‹è¿æ¥çš„è¿›ç¨‹
 SELECT sid, serial#, username, osuser FROM v$session;
 
---3.²é³öËø¶¨±íµÄsid, serial#,os_user_name, machine_name, terminal£¬ËøµÄtype,mode
+--3.æŸ¥å‡ºé”å®šè¡¨çš„sid, serial#,os_user_name, machine_name, terminalï¼Œé”çš„type,mode
 SELECT s.sid, s.serial#, s.username, s.schemaname, s.osuser, s.process, s.machine,
 s.terminal, s.logon_time, l.type
 FROM v$session s, v$lock l
@@ -15,8 +15,8 @@ WHERE s.sid = l.sid
 AND s.username IS NOT NULL
 ORDER BY sid;
 
---Õâ¸öÓï¾ä½«²éÕÒµ½Êı¾İ¿âÖĞËùÓĞµÄDMLÓï¾ä²úÉúµÄËø£¬»¹¿ÉÒÔ·¢ÏÖ£¬
---ÈÎºÎDMLÓï¾äÆäÊµ²úÉúÁËÁ½¸öËø£¬Ò»¸öÊÇ±íËø£¬Ò»¸öÊÇĞĞËø¡£
+--è¿™ä¸ªè¯­å¥å°†æŸ¥æ‰¾åˆ°æ•°æ®åº“ä¸­æ‰€æœ‰çš„DMLè¯­å¥äº§ç”Ÿçš„é”ï¼Œè¿˜å¯ä»¥å‘ç°ï¼Œ
+--ä»»ä½•DMLè¯­å¥å…¶å®äº§ç”Ÿäº†ä¸¤ä¸ªé”ï¼Œä¸€ä¸ªæ˜¯è¡¨é”ï¼Œä¸€ä¸ªæ˜¯è¡Œé”ã€‚
 
---É±µô½ø³Ì sid,serial#
+--æ€æ‰è¿›ç¨‹ sid,serial#
 --alter system kill session'210,11562';

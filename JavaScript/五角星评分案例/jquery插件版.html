@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>五角星评论案例</title>
+	<style>
+			#text{
+					height: 60px;
+			}
+	</style>
+<script src="../jquery/jquery-min.js"></script>
+	<script src="jquery.util.evaluation.js"></script>
+<script>
+	$(function(){
+		var evaluation = $.evaluation("text", {size: 40, color: "teal"});
+
+		$("#btn").click(function() {
+				alert(evaluation.evaluationVal());
+					});
+
+	});
+</script>
+</head>
+<body>
+
+<div id="text">
+</div>
+<div>
+	<button id="btn" type="button">获取评价值</button>
+</div>
+</body>
+</html>

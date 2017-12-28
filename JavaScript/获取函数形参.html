@@ -1,0 +1,22 @@
+<html>
+<head>
+  <script type="text/javascript">
+    /**
+    * 获取函数签名的形参
+    * @param {Function} func [要获取的函数]
+    * @return {*} [形参的数组或undefind]
+    */
+    function getFuncParameters(func) {
+      if (typeof func == 'function') {
+        var mathes = /[^(]+\(([^)]*)?\)/gm.exec(Function.prototype.toString.call(func));
+        if (mathes[1]) {
+          var args = mathes[1].replace(/[^,\w]*/g, '').split(',');
+          return args;
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

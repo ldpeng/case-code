@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <img src="http://localhost:3080/?start=1&count=10&hahah=hahah" alt=""> -->
+  <!-- <link rel="stylesheet" href="http://localhost:3080/?start=1&count=10&hahah=hahah"> -->
+  <!-- <script src="http://localhost:3080/?start=1&count=10&hahah=hahah"></script> -->
+  <script src="jquery.js"></script>
+  <script>
+    // XMLHttpRequest这个对象不支持跨域的请求
+    // $.get('http://localhost:3080/', {
+    //   start: 10,
+    //   count: 5
+    // }, function(data) {
+    //   console.log(data);
+    // });
+
+    // ===== img 跨域  audio video  link[rel="stylesheet"]
+    // img 支持跨域 问题：收发数据
+    // 支持将数据发出去
+    // 不能拿到服务端返回的数据
+    // var img = new Image();
+    // img.src = 'http://localhost:3080/?start=1&count=10&hahah=hahah';
+
+    // ===== script 跨域
+    // script 支持跨域
+    // √ 发送数据
+    // √ 接收数据也可以
+    // console.log(data);
+    // var script = document.createElement('script');
+    // script.src = 'http://localhost:3080/?start=1&count=10&hahah=hahah';
+    // document.body.appendChild(script); // 发送请求
+    // script.addEventListener('load', function() {
+    //   console.log(data);
+    // });
+    // console.log(data);
+    // 这种方式会污染全局作用域
+
+    // 由于脚本执行过后才能拿到数据
+    // var script = document.createElement('script');
+    // script.src = 'http://localhost:3080/?start=1&count=10&hahah=hahah&callback=jlsdfjkls';
+    // document.body.appendChild(script); // 发送请求
+    // // 换成被动的方式 就不用纠结了
+    // function callback (data) {
+    //   console.log(data);
+    // }
+    //
+  </script>
+</body>
+
+</html>

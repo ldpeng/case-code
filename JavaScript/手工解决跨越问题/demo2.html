@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>封装跨域请求方法</title>
+</head>
+
+<body>
+<input type="button" onclick="get()">
+  <!-- 封装跨域方法 -->
+  <script src="foo.js"></script>
+  <script>
+
+  function get () {
+    crossDomain(
+      'http://api.douban.com/v2/movie/in_theaters', {
+        start: 1,
+        count: 1
+      },
+      function(data) {
+        console.log('11111');
+      });
+  }
+    // // 测试使用
+    // crossDomain(
+    //   'http://api.douban.com/v2/movie/in_theaters', {
+    //     start: 1,
+    //     count: 1
+    //   },
+    //   function(data) {
+    //     console.log('11111');
+    //   });
+
+    // crossDomain(
+    //   'http://api.douban.com/v2/movie/in_theaters', {
+    //     start: 2,
+    //     count: 1
+    //   },
+    //   function(data) {
+    //     console.log('22222');
+    //   });
+  </script>
+</body>
+
+</html>

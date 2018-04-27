@@ -1,5 +1,3 @@
-package net.cyan.commons.util;
-
 import java.lang.*;
 import java.lang.Long;
 import java.text.*;

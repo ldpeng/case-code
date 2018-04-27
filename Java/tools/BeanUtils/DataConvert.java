@@ -1,5 +1,3 @@
-package net.cyan.commons.util;
-
 import net.cyan.commons.util.bean.*;
 import net.cyan.commons.util.json.JsonSerializer;
 import net.cyan.commons.util.language.Language;

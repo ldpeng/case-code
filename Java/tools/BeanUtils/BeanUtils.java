@@ -1,5 +1,3 @@
-package com.gzzm.govbusi.ssdj.utils;
-
 import com.gzzm.platform.commons.Tools;
 import net.cyan.commons.util.Filter;
 
